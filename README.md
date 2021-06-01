@@ -23,20 +23,19 @@ and then `git commit` + `git push` to deploy the changes.
 - create a **Secrets Manager `Secret`** named: `notejam` in the same region you plan to deploy. It must be JSON type.
   - set `gitHubToken` as **key**, and the **value** of the GitHub Access Token
 
-### Bootstrap your AWS environment
-```
-export CDK_NEW_BOOTSTRAP=1 
-npx cdk bootstrap \
-  --cloudformation-execution-policies arn:aws:iam::aws:policy/AdministratorAccess \
-  aws://${ACCOUNT_ID}/${REGION}
-```
-
 ### Create and Activate virtualenv & Install dependencies:
 ```
 npm install -g aws-cdk
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
+```
+
+### Bootstrap your AWS environment
+```
+./cdk-ctl.sh bootstrap prod \
+  --cloudformation-execution-policies arn:aws:iam::aws:policy/AdministratorAccess \
+  aws://${ACCOUNT_ID}/${REGION}
 ```
 
 ### Synthesize artifacts
